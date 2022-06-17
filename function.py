@@ -1,38 +1,29 @@
 # -*- coding:utf-8 -*-
 import requests
-from datetime import datetime
 
-# словарь из json файла
-def respons():
-    resp = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()
-    return resp
+class InvalidCurrency(Exception):
+    pass
 
-# курс валюты 
-def get_kurs(code):
-    res = respons()
-    if code in res['Valute']: 
-        result = res['Valute'][code]['Value']
-        return result
-
-# номинал валюты
-def get_nominal(code):
-    res = respons()
-    if code in res['Valute']: 
-        result = res['Valute'][code]['Nominal']
-        return result
-
-# проверка правильности ввода кода валюты
-def valid_code(code):
-    dt = datetime.now().date() 
-    res = respons()
-    if code not in res['Valute']:
-        print('неправильный код')
-    else:
-        print(f'{code} {dt} стоит {get_kurs(code):.2f} RUB.')
-        summ = int(input('Введите сумму: '))
-        print(f'{summ} {code} стоит {((get_kurs(code)*summ)/get_nominal(code)):.2f} RUB.')
+class Calculator:
+    def __init__(self):
+        self.rates = requests.get('https://www.cbr-xml-daily.ru/daily_json.js').json()
         
-# запрос к пользователю
-def spros():
-    char_code = input('Введите буквенный код валюты: ')
-    return char_code
+    # расчет конвертации валюты    
+    def calculate(self, currency, amount):
+        if currency not in self.rates['Valute']:
+            raise InvalidCurrency()
+        nominal = self.rates['Valute'][currency]['Nominal']
+        rate_api = self.rates['Valute'][currency]['Value']
+        return (rate_api * amount) / nominal
+    
+    # получить стоимость валюты
+    def get_rate(self, currency):
+        if currency not in self.rates['Valute']:
+            raise InvalidCurrency()
+        return self.rates['Valute'][currency]['Value']
+    
+    # получить номинал валюты
+    def get_nominal(self, currency):
+        if currency not in self.rates['Valute']:
+            raise InvalidCurrency()
+        return self.rates['Valute'][currency]['Nominal']
