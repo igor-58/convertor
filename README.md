@@ -9,12 +9,12 @@
 Для получения курса валюты использовался сторонний API www.cbr-xml-daily.ru
 В проекте создано виртуальное окружение.
 Для запуска приложения нужно активировать среду, для этого в коммандной строке в папке с приложением выполнить комманду venv\Scripts\activate.
-Пример: C:\Users\Igor\Desktop\convertor> venv\Scripts\activate
+Пример: C:\..\..\..\convertor> venv\Scripts\activate
 Для установления зависимостей в коммандной строке выполнить комманду pip install -r requirements.txt
-Пример: (venv) C:\Users\Igor\Desktop\convertor>pip install -r requirements.txt
+Пример: (venv) C:\..\..\..\convertor>pip install -r requirements.txt
 Запуск с помощью комманды main.py
-Пример: (venv) C:\Users\Igor\Desktop\convertor>main.py
+Пример: (venv) C:\..\..\..\convertor>main.py
 Так же в приложении добавлена возможность конвертации из одной валюты в другую.
 Исходники находятся в папке проекта converter. 
 Запуск конвертора так же с помощью комманды main.py из папки с исходниками в коммандной строке.
-Пример: (venv) C:\Users\Igor\Desktop\convertor\converter>main.py
+Пример: (venv) C:\..\..\..\convertor\converter>main.py
