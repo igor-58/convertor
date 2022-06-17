@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 from datetime import datetime
-from new_convert_class import Calculator_Currency_From_To, InvalidCurrency
+from calculator import Calculator_Currency_From_To, InvalidCurrency
 
 def main():
     dt = datetime.now().date() 
